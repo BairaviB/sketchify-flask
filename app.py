@@ -8,10 +8,10 @@ PORT = 3000
 @app.route("/")
 def startpy():
     
-    sketch.normalsketch('/home/prawin/Desktop/tact/sketchify-flask/moth.jpg',
-    '/home/prawin/Desktop/tact/sketchify-flask','mothdraw1')
+    sketch.normalsketch('moth.jpg',
+    'static/images','mothdraw2')
 
-    return render_template("index.html") 
+    return render_template("index.html", result = "mothdraw2") 
     
 
 
