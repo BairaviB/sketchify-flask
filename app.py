@@ -31,7 +31,6 @@ def upload_files():
 
 @app.route("/result")
 def startpy():
-    
     sketch.normalsketch('raw.png',
     'static/images','mothdraw2')
 

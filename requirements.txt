@@ -1,2 +1,4 @@
 sketchify
 opencv-python
+flask
+gunicorn
