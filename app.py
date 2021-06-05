@@ -5,23 +5,15 @@ from flask import Flask, render_template, request, redirect, url_for,send_file, 
     send_from_directory
 from werkzeug.utils import secure_filename
 import zipfile
+import cv2
 
-  
 app = Flask(__name__)
 
 PORT = 3000
 
 app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif']
-app.config['UPLOAD_PATH'] = 'static'
-  
-# @app.route("/")
-# def startpy():
-    
-#     sketch.normalsketch('moth.jpg',
-#     'static/images','mothdraw2')
-
-#     return render_template("index.html", result = "mothdraw2") 
+app.config['UPLOAD_PATH'] = '.'
 
 @app.route('/')
 def index():
@@ -34,8 +26,16 @@ def upload_files():
     filename = secure_filename(uploaded_file.filename)
     if filename != '':
         file_ext = os.path.splitext(filename)[1]
-        uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
+        uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], "raw.png"))
     return '', 204
+
+@app.route("/result")
+def startpy():
+    
+    sketch.normalsketch('raw.png',
+    'static/images','mothdraw2')
+
+    return render_template("index_old.html", result = "mothdraw2")
 
 @app.route('/uploads/<filename>')
 def upload(filename):
